@@ -20,8 +20,14 @@ public class PedidoService {
 
     public Optional<PedidoModel> buscarId(Long id) { return pedidoRepository.findById(id); }
 
-    public PedidoModel atualizarPedido(PedidoModel pedidoModel) {
+    public PedidoModel atualizarPedido(Long id, PedidoModel pedidoModel) {
         PedidoModel model = pedidoRepository.findById(id).get();
+        model.setData(pedidoModel.getData());
+        model.setValorTotal(pedidoModel.getValorTotal());
+        model.setStatus(pedidoModel.getStatus());
+        return pedidoRepository.save(model);
     }
+
+    public void excluir(Long id) { pedidoRepository.deleteById(id);}
 
 }

@@ -24,7 +24,7 @@ public class PedidoModel {
     public LocalDateTime getData() { return data; }
 
 
-    public void setData(LocalDateTime data) { this.data = data; }
+    public void setData(LocalDateTime data) { this.data = LocalDateTime.now(); }
 
     @Column(name = "valorPedido")
     public BigDecimal getValorTotal() { return valorTotal; }
