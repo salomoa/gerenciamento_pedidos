@@ -14,11 +14,11 @@ public class PedidoService {
     @Autowired
     private PedidoRepository  pedidoRepository;
 
-    public List<PedidoModel> findAll() { return pedidoRepository.findAll(); }
+    public List<PedidoModel> buscarTodosPedidos() { return pedidoRepository.findAll(); }
 
     public PedidoModel criarPedido(PedidoModel pedidoModel) { return pedidoRepository.save(pedidoModel); }
 
-    public Optional<PedidoModel> buscarId(Long id) { return pedidoRepository.findById(id); }
+    public Optional<PedidoModel> buscarPedidoId(Long id) { return pedidoRepository.findById(id); }
 
     public PedidoModel atualizarPedido(Long id, PedidoModel pedidoModel) {
         PedidoModel model = pedidoRepository.findById(id).get();

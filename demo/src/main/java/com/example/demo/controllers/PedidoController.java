@@ -12,15 +12,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = {"/pedido", "/pedidos"})
+@RequestMapping(path = {"/pedidos/", "/pedidos"})
 public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
 
     @GetMapping
-    public ResponseEntity<List<PedidoModel>> findAll(){
-        List<PedidoModel> requisicao = pedidoService.findAll();
+    public ResponseEntity<List<PedidoModel>> buscarTodosOsPedidos(){
+        List<PedidoModel> requisicao = pedidoService.buscarTodosPedidos();
         return ResponseEntity.ok().body(requisicao);
     }
 
@@ -41,16 +41,13 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<PedidoModel> findById(@PathVariable Long id){ return pedidoService.buscarId(id); }
+    public Optional<PedidoModel> buscarPedidoPorId(@PathVariable Long id){ return pedidoService.buscarPedidoId(id); }
 
     @PutMapping("/{id}")
     public ResponseEntity<PedidoModel> atualizar(@PathVariable Long id, @RequestBody PedidoModel pedidoModel){
-
         PedidoModel requisicao = pedidoService.atualizarPedido(id,pedidoModel);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                .path("/{id}").buildAndExpand(pedidoModel.getId())
-                .toUri();
-        return ResponseEntity.created(uri).body(requisicao);
+
+        return ResponseEntity.ok().body(requisicao);
     }
 
 }
